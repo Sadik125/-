@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="30" android:compileSdkVersionCodename="11" package="ru.profi.client" platformBuildVersionCode="30" platformBuildVersionName="11">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permission.WRITE_GSERVICES"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <data android:scheme="https"/>
+        </intent>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.GET_CONTENT"/>
+        </intent>
+    </queries>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <application android:allowBackup="true" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:fullBackupContent="@xml/backup_rules" android:icon="@mipmap/ic_launcher" android:label="@string/app_name" android:name="ru.profi.client.App" android:requestLegacyExternalStorage="true" android:supportsRtl="true" android:theme="@style/DesignSystem.Theme.Light" android:usesCleartextTraffic="true">
+        <receiver android:exported="true" android:name="com.appsflyer.SingleInstallBroadcastReceiver">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name="ru.profi.client.receiver.RemoteActionsReceiver">
+            <intent-filter>
+                <action android:name="profi_ru_action_reply"/>
+                <action android:name="profi_ru_action_mark_as_read"/>
+            </intent-filter>
+        </receiver>
+        <service android:exported="false" android:name="ru.profi.client.service.FcmService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <service android:name="ru.profi.client.service.UploadPhotoService"/>
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
+        <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyAWdPtpsQqjVR2rWbGhYTQX9yC0Il7ebSA"/>
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data android:name="PW_APPID" android:value="@string/PUSHWOOSH_APP_ID"/>
+        <meta-data android:name="PW_PROJECT_ID" android:value="@string/PUSHWOOSH_GCM_ID"/>
+        <meta-data android:name="com.urbanairship.autopilot" android:value="ru.profi.client.receiver.UrbanAirshipAutopilot"/>
+        <meta-data android:name="com.survicate.surveys.workspaceKey" android:value="@string/SURVICATE_KEY"/>
+        <meta-data android:name="com.facebook.sdk.AutoLogAppEventsEnabled" android:value="false"/>
+        <meta-data android:name="com.facebook.sdk.AutoInitEnabled" android:value="false"/>
+        <activity android:name="ru.profi.client.managers.deeplink.ProfiDeepLinkActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="profi-client.onelink.me" android:pathPrefix="/Bkv8" android:scheme="https"/>
+                <data android:pathPrefix="/3205134365"/>
+                <data android:pathPrefix="/nb62"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true" android:label="@string/app_name">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="http"/>
+                <data android:scheme="https"/>
+                <data android:host="m.profi.ru"/>
+                <data android:host="m.profi.kz"/>
+                <data android:host="m.profi-bel.by"/>
+                <data android:path="/"/>
+                <data android:pathPattern="/.*"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true" android:label="@string/app_name">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="http"/>
+                <data android:scheme="https"/>
+                <data android:scheme="profiapp"/>
+                <data android:host="profi.ru"/>
+                <data android:host="profi.kz"/>
+                <data android:host="profi-bel.by"/>
+                <data android:host="adygeya.profi.ru"/>
+                <data android:host="aktobe.profi.kz"/>
+                <data android:host="alania.profi.ru"/>
+                <data android:host="alm.profi.kz"/>
+                <data android:host="altai.profi.ru"/>
+                <data android:host="amur.profi.ru"/>
+                <data android:host="arhangelsk.profi.ru"/>
+                <data android:host="astrahan.profi.ru"/>
+                <data android:host="atyrau.profi.kz"/>
+                <data android:host="barnaul.profi.ru"/>
+                <data android:host="belgorod.profi.ru"/>
+                <data android:host="birobidzhan.profi.ru"/>
+                <data android:host="brest.profi-bel.by"/>
+                <data android:host="bryansk.profi.ru"/>
+                <data android:host="buryatia.profi.ru"/>
+                <data android:host="chechnya.profi.ru"/>
+                <data android:host="chel.profi.ru"/>
+                <data android:host="chukotka.profi.ru"/>
+                <data android:host="chuvashia.profi.ru"/>
+                <data android:host="dagestan.profi.ru"/>
+                <data android:host="ekt.profi.ru"/>
+                <data android:host="gomel.profi-bel.by"/>
+                <data android:host="grodno.profi-bel.by"/>
+                <data android:host="habarovsk.profi.ru"/>
+                <data android:host="hakasia.profi.ru"/>
+                <data android:host="ingushetia.profi.ru"/>
+                <data android:host="irkutsk.profi.ru"/>
+                <data android:host="ivanovo.profi.ru"/>
+                <data android:host="kaliningrad.profi.ru"/>
+                <data android:host="kalmykia.profi.ru"/>
+                <data android:host="kaluga.profi.ru"/>
+                <data android:host="kamchatka.profi.ru"/>
+                <data android:host="karaganda.profi.kz"/>
+                <data android:host="karelia.profi.ru"/>
+                <data android:host="kbrdnblkr.profi.ru"/>
+                <data android:host="kemerovo.profi.ru"/>
+                <data android:host="kirov.profi.ru"/>
+                <data android:host="komi.profi.ru"/>
+                <data android:host="kostanai.profi.kz"/>
+                <data android:host="kostroma.profi.ru"/>
+                <data android:host="krchvchrks.profi.ru"/>
+                <data android:host="krsk.profi.ru"/>
+                <data android:host="krym.profi.ru"/>
+                <data android:host="ksdr.profi.ru"/>
+                <data android:host="kurgan.profi.ru"/>
+                <data android:host="kursk.profi.ru"/>
+                <data android:host="kyzylorda.profi.kz"/>
+                <data android:host="kzn.profi.ru"/>
+                <data android:host="lipetsk.profi.ru"/>
+                <data android:host="magadan.profi.ru"/>
+                <data android:host="mangystau.profi.kz"/>
+                <data android:host="marijel.profi.ru"/>
+                <data android:host="mogilev.profi-bel.by"/>
+                <data android:host="mordovia.profi.ru"/>
+                <data android:host="murmansk.profi.ru"/>
+                <data android:host="narianmar.profi.ru"/>
+                <data android:host="nnov.profi.ru"/>
+                <data android:host="nsk.profi.ru"/>
+                <data android:host="omsk.profi.ru"/>
+                <data android:host="orel.profi.ru"/>
+                <data android:host="orenburg.profi.ru"/>
+                <data android:host="penza.profi.ru"/>
+                <data android:host="primorie.profi.ru"/>
+                <data android:host="prm.profi.ru"/>
+                <data android:host="profi-bel.by"/>
+                <data android:host="pskov.profi.ru"/>
+                <data android:host="pvl.profi.kz"/>
+                <data android:host="rnd.profi.ru"/>
+                <data android:host="ryazan.profi.ru"/>
+                <data android:host="sahalin.profi.ru"/>
+                <data android:host="saratov.profi.ru"/>
+                <data android:host="sever.profi.kz"/>
+                <data android:host="smolensk.profi.ru"/>
+                <data android:host="smr.profi.ru"/>
+                <data android:host="sochi.profi.ru"/>
+                <data android:host="spb.profi.ru"/>
+                <data android:host="stavropol.profi.ru"/>
+                <data android:host="tambov.profi.ru"/>
+                <data android:host="tolyatti.profi.ru"/>
+                <data android:host="tomsk.profi.ru"/>
+                <data android:host="tula.profi.ru"/>
+                <data android:host="tver.profi.ru"/>
+                <data android:host="tyumen.profi.ru"/>
+                <data android:host="tyva.profi.ru"/>
+                <data android:host="udmurtia.profi.ru"/>
+                <data android:host="ufa.profi.ru"/>
+                <data android:host="ulyanovsk.profi.ru"/>
+                <data android:host="vitebsk.profi-bel.by"/>
+                <data android:host="vladimir.profi.ru"/>
+                <data android:host="vnovgorod.profi.ru"/>
+                <data android:host="volgograd.profi.ru"/>
+                <data android:host="vologda.profi.ru"/>
+                <data android:host="vostok.profi.kz"/>
+                <data android:host="vrn.profi.ru"/>
+                <data android:host="yakutia.profi.ru"/>
+                <data android:host="yanao.profi.ru"/>
+                <data android:host="yar.profi.ru"/>
+                <data android:host="yug.profi.kz"/>
+                <data android:host="yugra.profi.ru"/>
+                <data android:host="zabaikal.profi.ru"/>
+                <data android:host="zapad.profi.kz"/>
+                <data android:host="zhambyl.profi.kz"/>
+                <data android:path=""/>
+                <data android:path="/"/>
+                <data android:pathPattern="/profile/.*"/>
+                <data android:pathPattern="/profile/.*/reviews"/>
+                <data android:pathPattern="/profile/.*/reviews/add"/>
+                <data android:pathPrefix="/domashnii_personal"/>
+                <data android:pathPrefix="/repetitor"/>
+                <data android:pathPrefix="/remont"/>
+                <data android:pathPrefix="/krasota"/>
+                <data android:pathPrefix="/doctor"/>
+                <data android:pathPrefix="/autoinstructor"/>
+                <data android:pathPrefix="/artist"/>
+                <data android:pathPrefix="/raznoe"/>
+                <data android:pathPattern="/cabinet"/>
+                <data android:pathPattern="/cabinet/orders/"/>
+                <data android:pathPrefix="/getapplink_lp"/>
+                <data android:pathPattern="/api/emsender/kmp_clck/.*"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="ru.profi.client.SHORTCUT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:host="profi.ru"/>
+                <data android:host="profi.kz"/>
+                <data android:host="profi-bel.by"/>
+                <data android:scheme="profiapp"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="profi.ru"/>
+                <data android:host="profi.kz"/>
+                <data android:host="profi-bel.by"/>
+                <data android:scheme="profiapp"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="ru.profi.client.activities.splash.SplashActivity" android:screenOrientation="portrait" android:theme="@style/SplashActivityTheme">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="ru.profi.intent.START_CLIENT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <meta-data android:name="android.app.shortcuts" android:resource="@xml/shortcuts"/>
+        </activity>
+        <activity android:name="ru.profi.client.activities.ImageActivity" android:screenOrientation="portrait"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize" android:label="@string/app_name" android:name="com.facebook.FacebookActivity" android:theme="@style/com_facebook_activity_theme"/>
+        <activity android:exported="true" android:name="com.facebook.CustomTabActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="fb940348212779165"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="cct.ru.profi.client" android:scheme="fbconnect"/>
+            </intent-filter>
+        </activity>
+        <activity android:label="ServiceActivity" android:name="com.vk.sdk.VKServiceActivity" android:theme="@style/VK.Transparent"/>
+        <activity android:name="ru.profi.client.activities.ImagePagerActivity" android:screenOrientation="portrait"/>
+        <activity android:launchMode="singleTask" android:name="ru.profi.client.modules.activities.AppActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize|stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="profi.ru"/>
+                <data android:host="profi.kz"/>
+                <data android:host="profi-bel.by"/>
+                <data android:pathPrefix="@string/deep_link_create_order"/>
+                <data android:pathPrefix="@string/deep_link_listing"/>
+                <data android:pathPrefix="@string/deep_link_listing_select_service"/>
+                <data android:pathPrefix="@string/deep_link_specialist"/>
+                <data android:pathPrefix="@string/deep_link_create_order_search"/>
+                <data android:pathPrefix="@string/deep_link_orders"/>
+                <data android:pathPrefix="@string/deep_link_chat_list_for_order"/>
+                <data android:pathPrefix="@string/deep_link_listing_for_order"/>
+                <data android:pathPrefix="@string/deep_link_details_for_order"/>
+                <data android:pathPrefix="@string/deep_link_add_order"/>
+                <data android:pathPrefix="@string/deep_link_chat_for_order"/>
+                <data android:pathPrefix="@string/deep_link_main"/>
+                <data android:pathPrefix="@string/deep_link_orders_history"/>
+                <data android:pathPrefix="@string/deep_link_web_view"/>
+                <data android:pathPrefix="@string/deep_link_leave_review_for_order"/>
+                <data android:pathPrefix="@string/deep_link_login"/>
+                <data android:scheme="localprofiapp"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="ru.profi.client.modules.socialauth.view.SocialAuthActivity" android:theme="@style/Theme.Transparent"/>
+        <activity android:name="ru.profi.client.wizard.StandaloneWizardActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name="ru.profi.client.modules.activities.ReviewFiltersActivity" android:screenOrientation="portrait"/>
+        <activity android:name="ru.profi.client.activities.appreview.NativeAppReviewActivity" android:theme="@style/Theme.Transparent"/>
+        <meta-data android:name="firebase_crashlytics_collection_enabled" android:value="true"/>
+        <activity android:name="ru.profi.android.wizard.impl.suggest.SuggestActivity" android:screenOrientation="portrait"/>
+        <activity android:name="ru.profi.android.wizard.impl.taggedsuggest.TaggedSuggestActivity" android:screenOrientation="portrait"/>
+        <activity android:name="ru.profi.android.wizard.impl.timetable.TimeTableActivity" android:screenOrientation="portrait"/>
+        <activity android:name="ru.profi.android.wizard.impl.map.MapActivity" android:screenOrientation="portrait" android:theme="@style/WizardMapActivity"/>
+        <activity android:name="ru.profi.android.wizardold.core.WizardActivity" android:screenOrientation="portrait"/>
+        <activity android:name="ru.profi.android.wizardold.suggest.SuggestActivity" android:screenOrientation="portrait"/>
+        <activity android:name="ru.profi.android.wizardold.taggedsuggest.module.TaggedSuggestActivity" android:screenOrientation="portrait"/>
+        <activity android:name="ru.profi.android.wizardold.timetable.module.TimeTableActivity" android:screenOrientation="portrait"/>
+        <receiver android:exported="true" android:name="ru.profi.client.services.smsreceiver.broadcast.SmsBroadcastReceiver">
+            <intent-filter>
+                <action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED"/>
+            </intent-filter>
+        </receiver>
+        <activity android:label=" " android:name="ru.profi.client.core.permissionchecker.activity.PermissionCheckerActivity" android:theme="@style/ThemeTransparent"/>
+        <activity android:name="com.survicate.surveys.SurveyActivity" android:theme="@style/Theme.Survey" android:windowSoftInputMode="adjustResize"/>
+        <activity android:label="@string/empty" android:name="ru.profi.permissionchecker.PermissionCheckerActivity" android:theme="@style/ThemeTransparent"/>
+        <activity android:name="com.facebook.CustomTabMainActivity"/>
+        <provider android:authorities="ru.profi.client.FacebookInitProvider" android:exported="false" android:name="com.facebook.internal.FacebookInitProvider"/>
+        <receiver android:exported="false" android:name="com.facebook.CurrentAccessTokenExpirationBroadcastReceiver">
+            <intent-filter>
+                <action android:name="com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        <service android:directBootAware="true" android:exported="false" android:name="com.google.firebase.messaging.FirebaseMessagingService">
+            <intent-filter android:priority="-500">
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <service android:directBootAware="true" android:exported="false" android:name="com.google.firebase.components.ComponentDiscoveryService">
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.crashlytics.CrashlyticsRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.iid.Registrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.remoteconfig.ktx.FirebaseRemoteConfigKtxRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.remoteconfig.RemoteConfigRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.abt.component.AbtRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonKtxRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.dynamicloading.DynamicLoadingRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+        </service>
+        <service android:enabled="true" android:exported="false" android:name="com.google.android.gms.tagmanager.TagManagerService"/>
+        <activity android:exported="true" android:name="com.google.android.gms.tagmanager.TagManagerPreviewActivity" android:noHistory="true">
+            <intent-filter>
+                <data android:scheme="tagmanager.c.ru.profi.client"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+            </intent-filter>
+        </activity>
+        <activity android:enabled="false" android:exported="false" android:launchMode="singleInstance" android:name="com.google.android.play.core.missingsplits.PlayCoreMissingSplitsActivity" android:process=":playcore_missing_splits_activity" android:stateNotNeeded="true"/>
+        <activity android:enabled="false" android:exported="false" android:name="com.google.android.play.core.common.PlayCoreDialogWrapperActivity" android:stateNotNeeded="true" android:theme="@style/Theme.PlayCore.Transparent"/>
+        <service android:enabled="false" android:exported="true" android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService">
+            <meta-data android:name="com.google.android.play.core.assetpacks.versionCode" android:value="11000"/>
+        </service>
+        <service android:enabled="false" android:exported="false" android:name="com.google.android.play.core.assetpacks.ExtractionForegroundService"/>
+        <activity android:excludeFromRecents="true" android:exported="false" android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <service android:exported="true" android:name="com.google.android.gms.auth.api.signin.RevocationBoundService" android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION" android:visibleToInstantApps="true"/>
+        <service android:exported="false" android:name="com.evernote.android.job.patched.internal.v21.PlatformJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:exported="false" android:name="com.evernote.android.job.patched.internal.v14.PlatformAlarmService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:exported="false" android:name="com.evernote.android.job.patched.internal.v14.PlatformAlarmServiceExact"/>
+        <receiver android:exported="false" android:name="com.evernote.android.job.patched.internal.v14.PlatformAlarmReceiver">
+            <intent-filter>
+                <action android:name="com.evernote.android.job.patched.internal.v14.RUN_JOB"/>
+                <action android:name="net.vrallev.android.job.v14.RUN_JOB"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.evernote.android.job.patched.internal.JobBootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.QUICKBOOT_POWERON"/>
+                <action android:name="com.htc.intent.action.QUICKBOOT_POWERON"/>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+            </intent-filter>
+        </receiver>
+        <service android:exported="false" android:name="com.evernote.android.job.patched.internal.JobRescheduleService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:exported="true" android:name="com.yandex.runtime.connectivity.internal.ConnectivityService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:enabled="true" android:exported="true" android:name="com.yandex.runtime.rpc.IServiceImpl">
+            <intent-filter>
+                <action android:name="com.yandex.runtime.rpc.IServiceImpl"/>
+            </intent-filter>
+        </service>
+        <receiver android:exported="true" android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+            </intent-filter>
+        </receiver>
+        <activity android:exported="false" android:name="com.google.android.gms.common.api.GoogleApiActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <meta-data android:name="com.bumptech.glide.integration.okhttp3.OkHttpGlideModule" android:value="GlideModule"/>
+        <provider android:authorities="ru.profi.client.workmanager-init" android:directBootAware="false" android:exported="false" android:multiprocess="true" android:name="androidx.work.impl.WorkManagerInitializer"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_alarm_service_default" android:exported="false" android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_job_service_default" android:exported="true" android:name="androidx.work.impl.background.systemjob.SystemJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_foreground_service_default" android:exported="false" android:name="androidx.work.impl.foreground.SystemForegroundService"/>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="false" android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"/>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.BATTERY_OKAY"/>
+                <action android:name="android.intent.action.BATTERY_LOW"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.DEVICE_STORAGE_LOW"/>
+                <action android:name="android.intent.action.DEVICE_STORAGE_OK"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.TIME_SET"/>
+                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="@bool/enable_system_alarm_service_default" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver">
+            <intent-filter>
+                <action android:name="androidx.work.impl.background.systemalarm.UpdateProxies"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="true" android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver" android:permission="android.permission.DUMP">
+            <intent-filter>
+                <action android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS"/>
+            </intent-filter>
+        </receiver>
+        <service android:directBootAware="true" android:exported="false" android:name="androidx.room.MultiInstanceInvalidationService"/>
+        <receiver android:enabled="true" android:exported="false" android:name="com.google.android.gms.measurement.AppMeasurementReceiver"/>
+        <service android:enabled="true" android:exported="false" android:name="com.google.android.gms.measurement.AppMeasurementService"/>
+        <service android:enabled="true" android:exported="false" android:name="com.google.android.gms.measurement.AppMeasurementJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <provider android:authorities="ru.profi.client.firebaseinitprovider" android:directBootAware="true" android:exported="false" android:initOrder="100" android:name="com.google.firebase.provider.FirebaseInitProvider"/>
+        <service android:exported="false" android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery">
+            <meta-data android:name="backend:com.google.android.datatransport.cct.CctBackendFactory" android:value="cct"/>
+        </service>
+        <service android:exported="false" android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <receiver android:exported="false" android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"/>
+        <provider android:authorities="ru.profi.client.lifecycle-process" android:exported="false" android:multiprocess="true" android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"/>
+        <meta-data android:name="com.android.dynamic.apk.fused.modules" android:value="base"/>
+        <meta-data android:name="com.android.stamp.source" android:value="https://play.google.com/store"/>
+        <meta-data android:name="com.android.stamp.type" android:value="STAMP_TYPE_STANDALONE_APK"/>
+        <meta-data android:name="com.android.vending.splits" android:resource="@xml/splits0"/>
+        <meta-data android:name="com.android.vending.derived.apk.id" android:value="1"/>
+    </application>
+</manifest>
